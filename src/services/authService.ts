@@ -8,9 +8,9 @@ export const createUser = (user: PostUser): Promise<Response> => fetch(baseUrl, 
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user)
-})
+});
 export const editUser = (user: PostUser, userId: string): Promise<Response> => fetch(`${baseUrl}/${userId}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(user)
-})
+});

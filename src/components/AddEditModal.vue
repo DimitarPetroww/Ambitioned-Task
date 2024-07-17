@@ -25,6 +25,7 @@
 import { ref, watch, computed } from 'vue';
 import { ValidationRule } from 'quasar';
 import { PostUser, User } from '../types/user';
+import { ModalActions } from '../types/modal';
 
 const props = defineProps({
     showModal: Boolean,
@@ -52,7 +53,7 @@ watch(() => props.user, (newVal) => {
 });
 
 // Computed
-const title = computed(() => (props.mode === 'edit' ? 'Edit User' : 'Add New User'));
+const title = computed(() => (props.mode === ModalActions.EDIT ? 'Edit User' : 'Add New User'));
 
 //Validation Rules
 
@@ -71,6 +72,7 @@ const ageRules: ValidationRule[] = [
 
 //Methods
 const closeModal = (): void => {
+    userData.value = { _id: '', name: '', email: '', age: 0 };
     internalShowModal.value = false;
 };
 

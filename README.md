@@ -3,18 +3,18 @@
 
 Technical task for ambitioned
 
-Steps to run the project:
+## Steps to run the project:
 
-## 1. Install the dependencies
+### 1. Install the dependencies
 ```bash
-yarn
+yarn install
 ```
 
-## 2. IMPORTANT: Api Key must be changed in quasar.config.js due to limitations from https://crudcrud.com/. Api keys have lifespan of 100 requests or 24 hours.
+### 2. IMPORTANT: Api Key must be changed in quasar.config.js due to limitations from https://crudcrud.com/. Api keys have lifespan of 100 requests or 24 hours.
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
-quasar dev
+yarn dev
 ```
 
 

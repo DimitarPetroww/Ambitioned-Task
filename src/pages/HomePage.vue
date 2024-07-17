@@ -24,15 +24,11 @@
 import { ref, onMounted } from 'vue';
 import { QTableColumn, Notify } from 'quasar';
 import { PostUser, User } from '../types/user';
+import { ModalActions } from '../types/modal';
 import AddEditUserModal from '../components/AddEditModal.vue';
 import LoaderOverlay from '../components/LoaderOverlay.vue';
 import { TABLE_COLUMNS } from '../config/table';
 import { createUser, deleteUser, editUser, getUsers } from '../services/authService';
-
-enum ModalActions {
-    ADD = 'add',
-    EDIT = 'edit'
-}
 
 defineOptions({
     name: 'HomePage'
