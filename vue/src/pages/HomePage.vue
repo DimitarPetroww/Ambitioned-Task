@@ -1,6 +1,7 @@
 <template>
-    <q-page class="q-pa-lg">
-        <q-table title="Users" :rows="rows" :columns="columns" row-key="_id" no-data-label="No users found!">
+    <q-page>
+        <q-table :hide-bottom="true" title="Users" :rows="rows" :columns="columns" row-key="_id"
+            no-data-label="No users found!">
             <template v-slot:top>
                 <q-btn label="Add User" color="primary" @click="openModal(ModalActions.ADD)" />
             </template>
@@ -8,15 +9,13 @@
                 <q-td class="text-center">
                     <q-btn icon="edit" color="blue" @click="openModal(ModalActions.EDIT, { ...props.row })" flat
                         dense />
-                    <q-btn icon="delete" color="red" @click="confirmDelete(props.row._id)" flat dense />
+                    <q-btn icon="delete" color="red" @click="removeRow(props.row._id)" flat dense />
                 </q-td>
             </template>
         </q-table>
 
-        <AddEditUserModal :showModal="showAddEditModal" :mode="modalMode" :user="selectedUser"
-            @update:showModal="showAddEditModal = $event" @submit="handleUserSubmit" />
-        <DeleteUserModal :showModal="showDeleteConfirm" :userId="userIdToDelete"
-            @update:showModal="showDeleteConfirm = $event" @confirm="removeRow" />
+        <AddEditUserModal :showModal="showModal" :mode="modalMode" :user="selectedUser"
+            @update:showModal="showModal = $event" @submit="handleUserSubmit" />
         <LoaderOverlay v-if="isLoading" />
     </q-page>
 </template>
@@ -26,8 +25,7 @@ import { ref, onMounted } from 'vue';
 import { QTableColumn, Notify } from 'quasar';
 import { PostUser, User } from '../types/user';
 import { ModalActions } from '../types/modal';
-import AddEditUserModal from '../components/AddEditUserModal.vue';
-import DeleteUserModal from '../components/DeleteUserModal.vue';
+import AddEditUserModal from '../components/AddEditModal.vue';
 import LoaderOverlay from '../components/LoaderOverlay.vue';
 import { TABLE_COLUMNS } from '../config/table';
 import { createUser, deleteUser, editUser, getUsers } from '../services/authService';
@@ -41,12 +39,9 @@ const isLoading = ref<boolean>(false);
 
 const columns = ref<QTableColumn[]>(TABLE_COLUMNS);
 
-const showAddEditModal = ref<boolean>(false);
+const showModal = ref<boolean>(false);
 const modalMode = ref<ModalActions>(ModalActions.ADD);
 const selectedUser = ref<User | null>(null);
-
-const showDeleteConfirm = ref<boolean>(false);
-const userIdToDelete = ref<string | undefined>(undefined);
 
 const fetchData = async (): Promise<void> => {
     try {
@@ -58,11 +53,6 @@ const fetchData = async (): Promise<void> => {
     } finally {
         isLoading.value = false;
     }
-};
-
-const confirmDelete = (id: string): void => {
-    userIdToDelete.value = id;
-    showDeleteConfirm.value = true;
 };
 
 const removeRow = async (id: string): Promise<void> => {
@@ -80,7 +70,7 @@ const removeRow = async (id: string): Promise<void> => {
 const openModal = (mode: ModalActions, user: User | null = null): void => {
     modalMode.value = mode;
     selectedUser.value = user;
-    showAddEditModal.value = true;
+    showModal.value = true;
 };
 
 const handleUserSubmit = async (user: PostUser, userId: string): Promise<void> => {

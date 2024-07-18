@@ -10,9 +10,7 @@ Technical task for ambitioned
 yarn install
 ```
 
-### 2. Since the generated token from crudcrud API has an expiration of 24 hours or 100 requests, you will need to do the following steps: 
-#### 2.1. Generate a new API token going to https://crudcrud.com/ <-- тук ако има по-специфичен линк
-#### 2.2. Go to `quasar.config.js` and replace the "RESOURCE_API_URL" env variable on line 55.
+### 2. IMPORTANT: Api Key must be changed in quasar.config.js due to limitations from https://crudcrud.com/. Api keys have lifespan of 100 requests or 24 hours.
 
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash

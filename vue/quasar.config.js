@@ -52,7 +52,7 @@ module.exports = configure(function (/* ctx */) {
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
       env: {
-        RESOURCE_API_URL: 'https://crudcrud.com/api/7d60669b6fae41bea8b5033f08c4950e/users'
+        RESOURCE_API_URL: 'https://crudcrud.com/api/189bb6b2343e408fae501888fd9f98c0/users'
       },
       // vueRouterBase,
       // vueDevtools,
